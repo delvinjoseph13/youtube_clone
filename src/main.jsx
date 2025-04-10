@@ -8,31 +8,10 @@ import HomePage from './pages/Home.jsx'
 import ProtectRoute from './components/ProtectRoute.jsx'
 import RegisterPage from './pages/RegisterPage.jsx'
 
-const app=createBrowserRouter([
-  {
-    path:'/Main',
-    element:<App/>
-  },
-  {
-    path:'/login',
-    element:<LoginPage/>
-  },
-  {
-    path:'/register',
-    element:<RegisterPage/>
-  },
-  {
-    path:'/home',
-    element:
-  
-        <HomePage/>
 
-    
-  }
-])
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={app}/>
-  </StrictMode>,
+    <App/>
+  </StrictMode>
 )

@@ -7,11 +7,16 @@ import { sampleVideos } from "../components/videos"
 function HomePage(){
 
     const [searchQuery,setSearchQuery]=useState("")
-    const [isSidebarCollapsed,setIsSidebarCollapsed]=useState(false)
+    const [isSidebarCollapsed,setIsSidebarCollapsed]=useState(false);
+    const [selectedCategory,setSelectedCategory]=useState("");
 
-    const filteredVideos = sampleVideos.filter((video) =>
+
+    const filterBySearch= sampleVideos.filter((video) =>
         video.title.toLowerCase().includes(searchQuery.toLowerCase())
       );
+
+     const filteredVideos=selectedCategory ? filterBySearch.filter((video)=> video.category ===selectedCategory) :filterBySearch;
+     
     return (
         <>
      <div className="flex flex-col h-screen" >
@@ -19,7 +24,11 @@ function HomePage(){
      <div className="flex flex-grow overflow-hidden">
       <SideBar collapsed={isSidebarCollapsed}/>
       {/* <main className="flex-grow overflow-y-auto bg-gray-100 p-4"> */}
-       <Videos videos={filteredVideos}/>
+       <Videos 
+       videos={filteredVideos} 
+       allVideos={sampleVideos}
+       onCategoryClick={setSelectedCategory}
+       selectedCategory={selectedCategory}/>
       {/* </main> */}
      </div>
     {/* <LoginPage/>  */}

@@ -3,12 +3,14 @@ import { SiYoutubeshorts } from "react-icons/si";
 import { MdSubscriptions } from "react-icons/md";
 import { FaHistory, FaRegPlayCircle, FaUserCircle, FaDownload } from "react-icons/fa";
 import { MdOutlineVideoLibrary, MdOutlineWatchLater, MdThumbUpOffAlt, MdOutlineMenuBook } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
 function SideBar(props){
+    const navigate=useNavigate();
 
     const items = [
-        { icon: <IoMdHome className="w-6 h-6" />, label: "Home" },
-        { icon: <SiYoutubeshorts className="w-6 h-6" />, label: "Shorts" },
+        { icon: <IoMdHome className="w-6 h-6" />, label: "Home",route:'/' },
+        { icon: <SiYoutubeshorts className="w-6 h-6" />, label: "Shorts", },
         { icon: <MdSubscriptions className="w-6 h-6" />, label: "Subscriptions" },
         { icon: <FaUserCircle className="w-6 h-6" />, label: "You" },
         { icon: <FaHistory className="w-6 h-6" />, label: "History" },
@@ -27,6 +29,7 @@ function SideBar(props){
                         return (
                             <div
                             key={index}
+                            onClick={()=>item.route && navigate(item.route)}
                             className={`${
                                 props.collapsed ? "px-1" : "px-4"
                               } flex items-center gap-4  py-2 rounded-lg hover:bg-gray-300 cursor-pointer transition duration-200`}

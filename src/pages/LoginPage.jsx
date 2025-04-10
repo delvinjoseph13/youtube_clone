@@ -1,6 +1,8 @@
 import { useState } from "react";
 import {useNavigate,Link} from "react-router-dom"
 import axios from "axios"
+import UserContext from "../utils/userContext";
+import { useContext } from "react";
 
 
 function LoginPage() {
@@ -8,18 +10,26 @@ function LoginPage() {
     const [email,setEmail]=useState();
     const [password,setPassword]=useState();
     const navigate=useNavigate()
+    const {setUser}=useContext(UserContext);
 
     const handleLogin=(e)=>{
         e.preventDefault();
-        const loginApi=axios.post(`https://dummyjson.com/products`,{
-            "email":email,
-            "password":password
-        }).then((res)=>{
-            console.log("Login Successful")
-            navigate('/home')
-        }).catch(error=>{
-            console.log(error)
-        })
+        // const loginApi=axios.post(`https://dummyjson.com/products`,{
+        //     "email":email,
+        //     "password":password
+        // }).then((res)=>{
+        //     console.log("Login Successful")
+        //     setLoginUser("not admin")
+        //     navigate('/home')
+        // }).catch(error=>{
+        //     console.log(error)
+        // })
+        const loginUser={
+          name:"sample",
+          email:"sample221@gmail.com"
+        }
+        setUser(loginUser)
+        navigate('/')
     }
 
 

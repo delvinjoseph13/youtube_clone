@@ -1,24 +1,37 @@
-function MainContent({ Videos }) {
-  const filterContent = [
-    "All",
-    "Comedy",
-    "Sample",
-    "Music",
-    "Trending",
-    "News",
-    "Live",
-    "Gaming",
-  ];
+import Videos from "../components/videos";
+import { useNavigate } from "react-router-dom";
+
+function MainContent({ Videos,allVideos,onCategoryClick,selectedCategory}) {
+
+   const categories=[... new Set(allVideos.map((videos) => videos.category))]
+
+   const navigate=useNavigate()
+
+   function handleGetVideo(id){
+     navigate(`watch/v/${id}`)
+   }
+  
 
   return (
     <div className="flex-1 bg-white p-6 overflow-y-auto text-black">
       <div className="flex gap-3 mb-6 overflow-x-auto scrollbar-hide">
-        {filterContent.map((filter, index) => (
+        <button 
+        className="text-black whitespace-nowrap bg-gray-200 px-4 py-1.5 rounded-full hover:bg-gray-300 cursor-pointer font-medium transition duration-200"
+        onClick={()=>onCategoryClick("")}
+        >
+          All
+        </button>
+        {categories.map((category, index) => (
           <button
             key={index}
-            className="text-black whitespace-nowrap bg-gray-200 px-4 py-1.5 rounded-full hover:bg-gray-300 cursor-pointer font-medium transition duration-200"
+            className={`text-black whitespace-nowrap bg-gray-200 px-4 py-1.5 rounded-full hover:bg-gray-300 cursor-pointer font-medium ${
+              selectedCategory===category  
+                ? "bg-red-500 text-black"
+                : "bg-gray-200"
+            }`}
+            onClick={()=>onCategoryClick(category)}
           >
-            {filter}
+            {category}
           </button>
         ))}
       </div>
@@ -28,6 +41,7 @@ function MainContent({ Videos }) {
             <div
               key={index}
               className="cursor-pointer w-full hover:scale-[1.02] transition-transform duration-200"
+              onClick={()=>handleGetVideo(video.id)}
             >
               <div className="rounded-xl overflow-hidden mb-2">
                 <img
