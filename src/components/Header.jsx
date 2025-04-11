@@ -4,7 +4,7 @@ import { MdKeyboardVoice,MdOutlineSwitchAccount,MdOutlineHelpOutline  } from "re
 import { IoIosNotifications } from "react-icons/io";
 import { FaRegUserCircle,FaGoogle } from "react-icons/fa";
 import { GoSignOut } from "react-icons/go";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Link } from "react-router-dom";
 import { useState } from "react";
 import Videos from "./videos";
 import { useContext } from "react";
@@ -75,7 +75,7 @@ function Header({ toggleSideBar, setSearchQuery }) {
                                 <div>
                                   <p className="text-black font-medium">{user.name}</p>
                                   <p className="text-black font-medium">{user.email}</p>
-                                  <p className="text-sm">View Your Channel</p>
+                                  <Link to="/channel/user/ddsd" className="text-sm text-blue-500">View Your Channel</Link>
                                 </div>
                               </div>
                               <div>

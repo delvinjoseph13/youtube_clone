@@ -11,6 +11,9 @@ import PageNotFound from "./components/PageNotFound"
 import UserContext from "./utils/userContext"
 import VideoDetailPage from "./pages/VideoDetailPage"
 import VideoPlayerPage from "./pages/VideoPlayerPage"
+import CreateChannelPage from "./pages/createChannelPage"
+import MyChannel from "./pages/MyChannel"
+import MyChannelMain from "./pages/MyChannelMain"
 
 function App() {
 
@@ -30,7 +33,11 @@ function App() {
         <Route path="/watch" element={<VideoDetailPage/>}>
             <Route path="v/:id" element={<VideoPlayerPage/>}/>
         </Route>
+      <Route path="/cretechannel" element={<CreateChannelPage/>}/>
 
+      <Route path="/channel" element={<MyChannel/>}>
+           <Route path="user/:id" element={<MyChannelMain/>}/>
+      </Route>
     </Routes>
    </Router>
     </UserContext.Provider>
