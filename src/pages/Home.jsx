@@ -1,17 +1,36 @@
 import SideBar from "../components/SideBar"
 import Videos from "../components/videos"
 import Header from "../components/Header"
-import { useState } from "react"
-import { sampleVideos } from "../components/videos"
+import { useEffect, useState } from "react"
+import axios from "axios"
 
 function HomePage(){
 
     const [searchQuery,setSearchQuery]=useState("")
     const [isSidebarCollapsed,setIsSidebarCollapsed]=useState(false);
     const [selectedCategory,setSelectedCategory]=useState("");
+    const [video,setVideos]=useState([])
+
+    useEffect(()=>{
+        const fetchData=async()=>{
+            try {
+                const videoApi=await axios.get('http://localhost:5000/all/videos').then((res)=>{
+                    console.log("home content",res.data)
+                    setVideos(res.data.data)
+                })
+            } catch (error) {
+                console.log("Error fetching api",error)
+            }
+
+        }
+        fetchData()
+
+    },[])
 
 
-    const filterBySearch= sampleVideos.filter((video) =>
+
+
+    const filterBySearch= video.filter((video) =>
         video.title.toLowerCase().includes(searchQuery.toLowerCase())
       );
 
@@ -26,7 +45,7 @@ function HomePage(){
       {/* <main className="flex-grow overflow-y-auto bg-gray-100 p-4"> */}
        <Videos 
        videos={filteredVideos} 
-       allVideos={sampleVideos}
+       allVideos={video}
        onCategoryClick={setSelectedCategory}
        selectedCategory={selectedCategory}/>
       {/* </main> */}

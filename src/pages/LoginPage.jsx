@@ -14,22 +14,23 @@ function LoginPage() {
 
     const handleLogin=(e)=>{
         e.preventDefault();
-        // const loginApi=axios.post(`https://dummyjson.com/products`,{
-        //     "email":email,
-        //     "password":password
-        // }).then((res)=>{
-        //     console.log("Login Successful")
-        //     setLoginUser("not admin")
-        //     navigate('/home')
-        // }).catch(error=>{
-        //     console.log(error)
-        // })
-        const loginUser={
-          name:"sample",
-          email:"sample221@gmail.com"
-        }
-        setUser(loginUser)
-        navigate('/')
+        const loginApi=axios.post(`http://localhost:5000/login`,{
+            "email":email,
+            "password":password
+        }).then((res)=>{
+            console.log("Login Successful")
+            console.log(res.data)
+            localStorage.setItem("token",res.data.token)
+            setUser({
+              name:res.data.username,
+              email:res.data.email,
+              avatar:res.data.avatar
+            })
+            navigate('/')
+        }).catch(error=>{
+          alert("Password or Email is not matching")
+            console.log(error)
+        })
     }
 
 
