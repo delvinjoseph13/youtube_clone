@@ -95,7 +95,7 @@ function Header({ toggleSideBar, setSearchQuery }) {
                     <p className="text-black font-medium">{user.name}</p>
                     <p className="text-black font-medium">{user.email}</p>
                     <Link
-                      to="/channel/user/ddsd"
+                      to={`/channel/user/${user.userId}`}
                       className="text-sm text-blue-500"
                     >
                       View Your Channel

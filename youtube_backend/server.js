@@ -5,7 +5,7 @@ import VideoRouter from "./routes/videoRoute.js";
 import UserLoginRoute from "./routes/userLoginRoute.js";
 import commentRoute from "./routes/CommentRoute.js";
 import likeDislikeRoute from "./routes/likeDislikeRoute.js";
-
+import channelRoute from "./routes/channelRoute.js";
 
 
 const app=express()
@@ -14,6 +14,7 @@ app.use(cors())
 app.use('/',VideoRouter)
 app.use('/videos',commentRoute)
 app.use('/videos',likeDislikeRoute)
+app.use(channelRoute)
 
 UserLoginRoute(app)
 

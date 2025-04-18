@@ -63,6 +63,7 @@ export const userLogin= (req,res)=>{
 
     res.status(200).json({
       message:"Successfully Logged in",
+      userId:data.userId,
       token:accessToken,
       email:email,
       username:data.username,

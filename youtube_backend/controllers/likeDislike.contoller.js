@@ -1,25 +1,57 @@
-import VideoModel from "../module/VideoSchema.js";
+import ReactionModel from "../module/ReactionModel.js";
 
-export const likedislike=async(req,res)=>{
+export const likedislike = async (req, res) => {
+    const { videoId } = req.params;
+    const { userId, type } = req.body;
+  
+    if (!["like", "dislike"].includes(type)) {
+      return res.status(400).json({ message: "Invalid reaction type" });
+    }
+  
+    try {
+      const existingReaction = await ReactionModel.findOne({ videoId, userId });
+  
+      let likes, dislikes;
+  
+      if (existingReaction) {
+        if (existingReaction.type === type) {
+          await ReactionModel.deleteOne({ _id: existingReaction._id });
+          likes = await ReactionModel.countDocuments({ videoId, type: 'like' });
+          dislikes = await ReactionModel.countDocuments({ videoId, type: 'dislike' });
+          return res.status(200).json({ message: `${type} removed`, likes, dislikes });
+        } else {
+          existingReaction.type = type;
+          await existingReaction.save();
+          likes = await ReactionModel.countDocuments({ videoId, type: 'like' });
+          dislikes = await ReactionModel.countDocuments({ videoId, type: 'dislike' });
+          return res.status(200).json({ message: `Reaction updated to ${type}`, likes, dislikes });
+        }
+      } else {
+        const newReaction = new ReactionModel({ videoId, userId, type });
+        await newReaction.save();
+        likes = await ReactionModel.countDocuments({ videoId, type: 'like' });
+        dislikes = await ReactionModel.countDocuments({ videoId, type: 'dislike' });
+        return res.status(201).json({ message: `${type} added`, likes, dislikes });
+      }
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  };
+
+
+export const getReaction=async(req,res)=>{
     const {videoId}=req.params;
-    const {type,userId}=req.body;
 
     try {
-        const video =await VideoModel.findById(videoId);
-        if(!video){
-            return res.status(404).json({message:"Video not Found"})
-        }
+        const likes=await ReactionModel.countDocuments({videoId, type: "like" });
+        const dislikes=await ReactionModel.countDocuments({videoId, type: "dislike" })
 
-        if(type==="like"){
-            video.likes+=1;
-        }else if(type==="dislikes"){
-            video.dislikes+=1
-        }
-
-        await video.save();
-        res.status(200).json({message:"updated",video})
+        res.status(200).json({likes,dislikes})
     } catch (error) {
         res.status(500).json({message:error.message})
     }
+} 
 
-}
+
+
+  

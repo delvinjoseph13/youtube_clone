@@ -21,7 +21,9 @@ function LoginPage() {
             console.log("Login Successful")
             console.log(res.data)
             localStorage.setItem("token",res.data.token)
+            
             setUser({
+              userId:res.data.userId,
               name:res.data.username,
               email:res.data.email,
               avatar:res.data.avatar
