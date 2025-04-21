@@ -62,7 +62,7 @@ export const userLogin= (req,res)=>{
     const accessToken=jwt.sign({id:data._id,email:data.email},process.env.JWT_SECRET,{expiresIn:"1h"})
 
     res.status(200).json({
-      message:"Successfully Logged in",
+      message:"Successfully Logged in for first ",
       userId:data.userId,
       token:accessToken,
       email:email,
