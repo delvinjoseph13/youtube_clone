@@ -23,11 +23,20 @@ const channelSchema=mongoose.Schema({
         type:String
     },
     subscribers:{
-        type:Number
+        type:Number,
+        default:1000
     },
     videos:[
         {
-            type:String
+            videoId:{
+                type:String
+            },
+            videoImg:{
+                type:String
+            },
+            videoTitle:{
+                type:String
+            }
         }
     ]
    

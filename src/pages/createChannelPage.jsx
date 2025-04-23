@@ -1,22 +1,70 @@
-import { useState } from "react";
-import { Camera } from "lucide-react"; // for upload icon 
+import { useEffect, useState } from "react";
+import { Camera } from "lucide-react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function CreateChannelPage() {
+  const navigate = useNavigate();
+
+  const [preview, setPreview] = useState(null);
   const [channelName, setChannelName] = useState("");
   const [description, setDescription] = useState("");
-  const [logo, setLogo] = useState(null);
-  const [preview, setPreview] = useState(null);
+  const [banner,setBanner]=useState("")
+
+  const user = JSON.parse(localStorage.getItem("user"));
+  const username = user?.name;
+  const [owner,setOwner]=useState(user?.name)
+
 
   const handleLogoChange = (e) => {
     const file = e.target.files[0];
-    setLogo(file);
+    setBanner(file);
     setPreview(URL.createObjectURL(file));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log({ channelName, description, logo });
+  
+    try {
+      // Check if user already has a channel
+      const res = await axios.get(`http://localhost:5000/channel/videos/${username}`);
+      const videos = res.data?.videos;
+  
+      if (videos) {
+        alert("Channel already exists!");
+        return navigate(`/channel/${username}`);
+      }
+    } catch (error) {
+      // If error, assume no channel exists and continue
+    }
+  
+    try {
+      const formData = new FormData();
+      formData.append("channelName", channelName);
+      formData.append("description", description);
+      formData.append("username", username);
+      formData.append("banner", banner); // this is the image file
+  
+      await axios
+        .post("http://localhost:5000/channel/createChannel", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        })
+        .then(() => {
+          alert("Channel created successfully!");
+          navigate(`/channel/user/${username}`);
+        })
+        .catch((err) => {
+          console.error("Error creating channel:", err);
+          alert("Something went wrong!");
+        });
+    } catch (error) {
+      console.error("Channel creation failed:", error);
+      alert("Failed to create channel.");
+    }
   };
+  
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">

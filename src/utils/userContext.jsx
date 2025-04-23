@@ -18,6 +18,7 @@ export const UserProvider = ({ children }) => {
     } else {
       localStorage.removeItem("user");
       localStorage.removeItem("avatar");
+      localStorage.removeItem("token")
     }
   }, [user]);
 
