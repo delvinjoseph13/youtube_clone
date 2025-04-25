@@ -32,7 +32,7 @@ Frontend (React)
 Technology      |     Usage
 Frontend        | React, React Router, Axios
 Backend         | Node.js, Express.js
-Database        | MongoDB Compass
+Database        | MongoDB Atlas
 Authentication  | JWT (JSON Web Tokens)
 Version Control | Git & GitHub
 
@@ -58,114 +58,114 @@ youtube-clone/                       # React Frontend
 ├── README.md
 └── .env
 
-
-Core Functionalities:
-
- Home Page:
-
- .Header with search bar and sign-in button
- .Sidebar with toggle menu
- .Grid of video thumbnails
- .Filter videos by category
-
- User Authentication:
- 
- .Register/Login with email and password
- .JWT token stored in localStorage
- .Authenticated users see their name in the header
-
-Video Player Page:
-
- .Title, views, uploader info, date
- .Likes, dislikes
- .Comment system: Add, Edit, Delete
-
-Channel Page:
-
- .Create/edit/delete videos
- .View only your own videos
- .Channel banner, name, description, and video list
-
-Search and Filter:
-
- .Real-time search by video title
- .Category filters using buttons
-
-
- Sample Data:
-
- Video:
-
+<br/>
+Core Functionalities:<br/>
+<br/>
+ Home Page:<br/>
+<br/>
+ .Header with search bar and sign-in button<br/>
+ .Sidebar with toggle menu<br/>
+ .Grid of video thumbnails<br/>
+ .Filter videos by category<br/>
+<br/>
+ User Authentication:<br/>
+ <br/>
+ .Register/Login with email and password<br/>
+ .JWT token stored in localStorage<br/>
+ .Authenticated users see their name in the header<br/>
+<br/>
+Video Player Page:<br/>
+<br/>
+ .Title, views, uploader info, date<br/>
+ .Likes, dislikes<br/>
+ .Comment system: Add, Edit, Delete<br/>
+<br/>
+Channel Page:<br/>
+<br/>
+ .Create/edit/delete videos<br/>
+ .View only your own videos<br/>
+ .Channel banner, name, description, and video list<br/>
+<br/>
+Search and Filter:<br/>
+<br/>
+ .Real-time search by video title<br/>
+ .Category filters using buttons<br/>
+<br/>
+<br/>
+ Sample Data:<br/>
+<br/>
+ Video:<br/>
+<br/>
 {
-  "videoId": "lpDnG76TvN0",
-  "title": "Panjara Punch | Alappuzha Gymkhana| Khalid Rahman| Naslen,Anagha| Vishnu Vijay | Suhail Koya",
-  "thumbnailUrl": "https://i.ytimg.com/vi/lpDnG76TvN0/hqdefault.jpg?sqp=-oaymwEnCOADEI4CSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLDKux5hRutUpslm33sfTqpoCbLa5Q",
-  "description": "Here's the Panjara Punch Song from Alappuzha Gymkhana, Sung by Anthony Daasan & Vishnu Vijay, Lyrics Written by Suhail Koya, Music Composed by Vishnu Vijay.",
-  "channelId": "channel01",
-  "uploader": "user01",
-  "views": 15200,
-  "uploadDate": "2025-04-25",
-  "comments": [
-    {
-      "commentId": "comment01",
-      "userId": "user02",
-      "text": "Great video! Very helpful.",
-      "timestamp": "2024-09-21T08:30:00Z"
-    }
-  ]
-}
-
-User:
-
-{
-  "userId": "user01",
-  "username": "JohnDoe",
-  "email": "john@example.com",
-  "password": "hashedPassword123",
-  "avatar": "https://example.com/avatar/johndoe.png",
-  "channels": ["channel01"]
-}
-
-
-channel :
-
-{
-  "channelId": "channel01",
-  "channelName": "Code with John",
-  "owner": "user01",
-  "description": "Coding tutorials and tech reviews by John Doe.",
-  "channelBanner": "https://example.com/banners/john_banner.png",
-  "subscribers": 5200,
-  "videos": ["video01", "video02"]
-}
-
-
-API Endpoints:
-
-User Routes:
- .POST /register
- .POST /login
-
-Channel Routes:
-  .POST   /channel/createchannel
-  .GET    /channel/videos/:id
-  .PATCH  /channel/:channelId/add-video
-  .PATCH  /channel/editvideo/:channelId/:videoId
-  .DELETE /:videoId/comments/:commentId
-
-Video Routes
-  .POST /videos
-  .GET /all/videos
-
-Comment Routes:
-  .GET   /:videoId/comments
-  .POST  /:videoId/comments
-  .PUT   /:videoId/comments/:commentId
-  .DELETE /:videoId/comments/:commentId
-
-Reaction Route:
-  .POST /:videoId/like
-  .GET /:videoId/like
+  "videoId": "lpDnG76TvN0",<br/>
+  "title": "Panjara Punch | Alappuzha Gymkhana| Khalid Rahman| Naslen,Anagha| Vishnu Vijay | Suhail Koya",<br/>
+  "thumbnailUrl": "https://i.ytimg.com/vi/lpDnG76TvN0/hqdefault.jpg?sqp=-oaymwEnCOADEI4CSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLDKux5hRutUpslm33sfTqpoCbLa5Q",<br/>
+  "description": "Here's the Panjara Punch Song from Alappuzha Gymkhana, Sung by Anthony Daasan & Vishnu Vijay, Lyrics Written by Suhail Koya, Music Composed by Vishnu Vijay.",<br/>
+  "channelId": "channel01",<br/>
+  "uploader": "user01",<br/>
+  "views": 15200,<br/>
+  "uploadDate": "2025-04-25",<br/>
+  "comments": [<br/>
+    {<br/>
+      "commentId": "comment01",<br/>
+      "userId": "user02",<br/>
+      "text": "Great video! Very helpful.",<br/>
+      "timestamp": "2024-09-21T08:30:00Z"<br/>
+    }<br/>
+  ]<br/>
+}<br/>
+<br/>
+User<br/>
+<br/>
+{<br/>
+  "userId": "user01",<br/>
+  "username": "JohnDoe",<br/>
+  "email": "john@example.com",<br/>
+  "password": "hashedPassword123",<br/>
+  "avatar": "https://example.com/avatar/johndoe.png",<br/>
+  "channels": ["channel01"]<br/>
+}<br/>
+<br/>
+<br/>
+channel :<br/>
+<br/>
+{<br/>
+  "channelId": "channel01",<br/>
+  "channelName": "Code with John",<br/>
+  "owner": "user01",<br/>
+  "description": "Coding tutorials and tech reviews by John Doe.",<br/>
+  "channelBanner": "https://example.com/banners/john_banner.png",<br/>
+  "subscribers": 5200,<br/>
+  "videos": ["video01", "video02"]<br/>
+}<br/>
+<br/>
+<br/>
+API Endpoints:<br/>
+<br/>
+User Routes:<br/>
+ .POST /register<br/>
+ .POST /login<br/>
+<br/>
+Channel Routes:<br/>
+  .POST   /channel/createchannel<br/>
+  .GET    /channel/videos/:id<br/>
+  .PATCH  /channel/:channelId/add-video<br/>
+  .PATCH  /channel/editvideo/:channelId/:videoId<br/>
+  .DELETE /:videoId/comments/:commentId<br/>
+<br/>
+Video Routes<br/>
+  .POST /videos<br/>
+  .GET /all/videos<br/>
+<br/>
+Comment Routes:<br/>
+  .GET   /:videoId/comments<br/>
+  .POST  /:videoId/comments<br/>
+  .PUT   /:videoId/comments/:commentId<br/>
+  .DELETE /:videoId/comments/:commentId<br/>
+<br/>
+Reaction Route:<br/>
+  .POST /:videoId/like<br/>
+  .GET /:videoId/like<br/>
  
   
 
