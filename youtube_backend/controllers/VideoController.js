@@ -1,6 +1,8 @@
 
 import VideoModel from "../module/VideoSchema.js"
 
+
+//creating new Youtube video
 export const youtubeVideo=async(req,res)=>{
     try {
         const newVideo=new VideoModel(req.body)
@@ -13,6 +15,7 @@ export const youtubeVideo=async(req,res)=>{
 
 }
 
+//Getting all the videos
 export const AllVideos=(req,res)=>{
     try {
         const videos=VideoModel.find().then((data)=>{

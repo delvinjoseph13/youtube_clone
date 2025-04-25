@@ -22,6 +22,8 @@ UserLoginRoute(app)
 app.use("/uploads", express.static("uploads"));
 
 
+
+//connection to the mongodb database
 mongoose.connect("mongodb://localhost:27017/youtube_clone")
 .then(()=>console.log("db connected successfully"))
 .catch(()=>console.log("error connecting to database"))

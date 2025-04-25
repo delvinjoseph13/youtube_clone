@@ -26,7 +26,7 @@ function CreateChannelPage() {
     e.preventDefault();
   
     try {
-      // Check if user already has a channel
+      // Checking if user already has a channel it returns me an array of vidos || []
       const res = await axios.get(`http://localhost:5000/channel/videos/${username}`);
       const videos = res.data?.videos;
   
@@ -36,6 +36,7 @@ function CreateChannelPage() {
       }
     } catch (error) {
       // If error, assume no channel exists and continue
+      console.log("No Channel Is Present")
     }
   
     try {
@@ -44,7 +45,8 @@ function CreateChannelPage() {
       formData.append("description", description);
       formData.append("username", username);
       formData.append("banner", banner); // this is the image file
-  
+      
+      //if there is no channel creating a new channel
       await axios
         .post("http://localhost:5000/channel/createChannel", formData, {
           headers: {

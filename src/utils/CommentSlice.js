@@ -73,7 +73,7 @@ const CommentSlice = createSlice({
         state.comments.push(action.payload);
       })
 
-      // In your extraReducers:
+      //editing comment
       .addCase(editComment.fulfilled, (state, action) => {
         const updatedComment = action.payload;
         const index = state.comments.findIndex((c) => c.commentId === updatedComment.commentId);

@@ -1,84 +1,93 @@
 import { CiMenuBurger, CiSettings } from "react-icons/ci";
 import { BiSearch } from "react-icons/bi";
-import {
-  MdKeyboardVoice,
-  MdOutlineSwitchAccount,
-  MdOutlineHelpOutline,
-} from "react-icons/md";
+import { MdKeyboardVoice, MdOutlineSwitchAccount, MdOutlineHelpOutline } from "react-icons/md";
 import { IoIosNotifications } from "react-icons/io";
 import { FaRegUserCircle, FaGoogle } from "react-icons/fa";
 import { GoSignOut } from "react-icons/go";
 import { useNavigate, Link } from "react-router-dom";
-import { useState } from "react";
-import Videos from "./videos";
-import { useContext } from "react";
+import { useState, useContext } from "react";
 import UserContext from "../utils/userContext.jsx";
 
 function Header({ toggleSideBar, setSearchQuery }) {
   const navigate = useNavigate();
-  const { user, setUser } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);//context api
   const [showDropDown, setShowDropDown] = useState(false);
-  const avatar = user?.avatar;
+  const avatar = user?.avatar;//comming from the userContext.js
+
   return (
-    <header className="px-4 sm:px-6 py-3 flex flex-col sm:flex-row justify-between items-center sticky top-0 z-50 bg-white shadow-md">
-      {/* Top Row (Logo & Menu) */}
-      <div className="w-full sm:w-auto flex justify-between items-center mb-3 sm:mb-0">
-        <div className="flex gap-4 items-center">
-          <CiMenuBurger
-            className="w-6 h-6 sm:w-7 sm:h-7 cursor-pointer hover:text-red-600 transition duration-200"
-            onClick={toggleSideBar}
-          />
+    <header className="px-2 sm:px-4 py-2 flex items-center justify-between sticky top-0 z-50 bg-white shadow-sm gap-2 sm:gap-4">
+      {/* Left Section */}
+      <div className="flex items-center gap-2 flex-shrink-0">
+        <CiMenuBurger
+          className="w-5 h-5 sm:w-6 sm:h-6 cursor-pointer hover:text-red-600 transition-colors"
+          onClick={toggleSideBar}
+          aria-label="Toggle menu"
+        />
+        <Link to="/" className="flex items-center">
           <img
             src="https://www.gstatic.com/youtube/img/branding/youtubelogo/svg/youtubelogo.svg"
-            alt="YouTube Logo"
-            className="w-[90px] h-auto"
+            alt="YouTube"
+            className="w-[70px] sm:w-[90px] h-auto"
           />
-        </div>
+        </Link>
       </div>
 
-      {/* Center - Search bar */}
-      <div className="w-full sm:w-[500px] flex items-center max-w-full mb-3 sm:mb-0">
-        <div className="flex flex-grow items-center border border-zinc-700 rounded-l-full overflow-hidden">
+      {/* Center Search */}
+      <div className="flex flex-1 max-w-[600px] min-w-[100px]">
+        <div className="flex flex-grow items-center border border-gray-300 rounded-l-full overflow-hidden focus-within:border-blue-500 transition-colors">
           <input
             type="text"
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search"
-            className="text-black px-3 py-2 w-full focus:outline-none text-sm"
+            className="w-full px-2 sm:px-3 py-1 text-sm focus:outline-none bg-transparent"
+            aria-label="Search videos"
           />
         </div>
-        <button className="bg-gray-300 px-4 py-[10px] rounded-r-full hover:bg-zinc-700 transition duration-200 border border-zinc-700 border-l-0">
-          <BiSearch className="text-white w-5 h-5" />
+        <button 
+          className="bg-gray-100 hover:bg-gray-200 px-2 sm:px-3 py-1 rounded-r-full border-l-0 transition-colors flex-shrink-0"
+          aria-label="Search"
+        >
+          <BiSearch className="w-4 h-4 sm:w-5 sm:h-5" />
         </button>
-        <button className="ml-2 sm:ml-3 bg-zinc-900 p-3 rounded-full hover:bg-zinc-700 transition duration-200">
-          <MdKeyboardVoice className="text-white w-5 h-5" />
+        <button 
+          className="ml-1 bg-gray-100 hover:bg-gray-200 p-1 sm:p-2 rounded-full transition-colors flex-shrink-0"
+          aria-label="Voice search"
+        >
+          <MdKeyboardVoice className="w-4 h-4 sm:w-5 sm:h-5" />
         </button>
       </div>
 
-      {/* Right - Actions */}
-      <div className="flex items-center gap-3 sm:gap-5">
-        <button className="flex items-center gap-1 bg-gray-300 px-3 sm:px-4 py-2 rounded-full hover:bg-zinc-400 transition duration-200 text-sm">
-          <span className="text-base">+</span>
-          <span>Create</span>
+      {/* Right Actions */}
+      <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+        <button 
+          className="hidden xs:flex items-center gap-1 bg-gray-100 hover:bg-gray-200 px-2 sm:px-3 py-1 rounded-full transition-colors text-sm"
+          aria-label="Create"
+        >
+          <span className="text-lg">+</span>
+          <span className="hidden sm:inline">Create</span>
         </button>
-        <IoIosNotifications className="w-5 h-5 sm:w-6 sm:h-6 cursor-pointer hover:text-red-500 transition duration-200" />
+        
+        <IoIosNotifications className="w-5 h-5 sm:w-6 sm:h-6 cursor-pointer hover:text-red-500 transition-colors flex-shrink-0" />
+
         {user ? (
           <div className="relative">
-            <div
-              className={`${avatar ? "border-none" : "border border-blue-400"}flex items-center gap-2  p-1 rounded-2xl cursor-pointer`}
-              onClick={() => setShowDropDown((prev) => !prev)}
+            <button
+              onClick={() => setShowDropDown(!showDropDown)}
+              className="flex items-center p-1 rounded-full hover:bg-gray-100 transition-colors flex-shrink-0"
+              aria-label="User menu"
             >
               {avatar ? (
                 <img
                   src={`http://localhost:5000${avatar}`}
-                  alt="User Image"
-                  className="object-cover w-8 h-8 rounded-full transition duration-200"
-                  />
+                  alt="Profile"
+                  className="w-6 h-6 sm:w-8 sm:h-8 rounded-full object-cover"
+                />
               ) : (
-                <FaRegUserCircle className="w-5 h-5 sm:w-6 sm:h-6 text-blue-500 hover:text-red-500 transition duration-200" />
+                <FaRegUserCircle className="w-6 h-6 text-gray-600 hover:text-red-500" />
               )}
-              
-            </div>
+            </button>
 
+            {/* Dropdown Menu */}
             {showDropDown && (
               <div className="absolute right-0 mt-2 w-72 bg-white border rounded-md shadow-lg p-3 z-50 ">
                 <div className="p-2 flex items-center gap-2 border-b-1 border-gray-300">
@@ -147,13 +156,13 @@ function Header({ toggleSideBar, setSearchQuery }) {
             )}
           </div>
         ) : (
-          <div
-            className="flex gap-2 border border-blue-400 p-1 rounded-2xl cursor-pointer"
+          <button
             onClick={() => navigate("/login")}
+            className="flex items-center gap-1 text-sm text-blue-500 hover:text-blue-600 px-2 py-1 rounded-full"
           >
-            <FaRegUserCircle className="w-5 h-5 sm:w-6 sm:h-6 cursor-pointer text-blue-500 hover:text-red-500 transition duration-200" />
-            <h3 className="text-sm text-blue-500 font-medium">sign in</h3>
-          </div>
+            <FaRegUserCircle className="w-5 h-5" />
+            <span className="hidden sm:inline">Sign In</span>
+          </button>
         )}
       </div>
     </header>

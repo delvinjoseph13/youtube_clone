@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken"
 
 dotenv.config()
 
+
 export const authorization=(req,res,next)=>{
     const authHeader=req.headers['authorization'];
     const token=authHeader && authHeader.split(" ")[1];

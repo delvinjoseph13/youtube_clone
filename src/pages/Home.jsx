@@ -39,10 +39,11 @@ function HomePage(){
     return (
         <>
      <div className="flex flex-col h-screen" >
+        {/* passing the value from the child to partent and upading the toggleSidebar and getting the search input */}
      <Header toggleSideBar={()=>setIsSidebarCollapsed(prev=>!prev)} setSearchQuery={setSearchQuery}/>
      <div className="flex flex-grow overflow-hidden">
-      <SideBar collapsed={isSidebarCollapsed}/>
-      {/* <main className="flex-grow overflow-y-auto bg-gray-100 p-4"> */}
+        {/* isSidebarCollapsed is used to minimize is sidebar or not the setIsSidebarCollapsed gives me boolean value if it is true then no sidebar or else there is sidebar */}
+      <SideBar collapsed={isSidebarCollapsed}/> 
        <Videos 
        videos={filteredVideos} 
        allVideos={video}

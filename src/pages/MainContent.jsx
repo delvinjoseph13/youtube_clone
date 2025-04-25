@@ -3,16 +3,20 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import UserContext from "../utils/userContext";
 
+
+//main Page for the all youtube videos
 function MainContent({ Videos, allVideos, onCategoryClick, selectedCategory }) {
   const categories = [...new Set(allVideos.map((video) => video.category))];
   const { user } = useContext(UserContext);
 
   const navigate = useNavigate();
 
+  //function to get to watch the youtube video with specific id
   function handleGetVideo(id) {
     navigate(`watch/v/${id}`);
   }
 
+  //function to convert the data string to human readable time differnce between that data and the current time eg 5 minutes ago
   function timeAgo(dateString) {
     const now = new Date();
     const uploadedDate = new Date(dateString);

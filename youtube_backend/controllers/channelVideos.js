@@ -18,7 +18,7 @@ import VideoModel from "../module/VideoSchema.js";
 // }
 
 
-
+//creating new Channel
 export const createChannel=async(req,res)=>{
     try {
         const {channelName,description,username}=req.body;
@@ -41,6 +41,8 @@ export const createChannel=async(req,res)=>{
     }
 }
 
+
+//getting the channel Videos and other details
 export const getChannelVideos = async (req, res) => {
     try {
         const { username } = req.params;
@@ -72,6 +74,8 @@ export const getChannelVideos = async (req, res) => {
     }
 };
 
+
+//adding new Video to the channel
 export const addVideoToChannel=async(req,res)=>{
     try {
         const {channelId}=req.params;
@@ -110,6 +114,8 @@ export const addVideoToChannel=async(req,res)=>{
 
 }
 
+
+//editing a channel video
 export const editVideo = async (req, res) => {
     const { channelId, videoId } = req.params;
     const { videoTitle, videoImg } = req.body;
@@ -144,6 +150,8 @@ export const editVideo = async (req, res) => {
     }
   };
 
+
+//deleting a video
 export const deleteVideoFromChannel = async (req, res) => {
     const { channelId, videoId } = req.params;
   

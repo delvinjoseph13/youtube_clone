@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 
 
 
+//getting the comment for the particular videoId
 export const commentsById=async(req,res)=>{
     try {
         const {videoId}=req.params;
@@ -17,6 +18,7 @@ export const commentsById=async(req,res)=>{
 }
 
 
+//adding a new Comment
 export const addComment=async(req,res)=>{
         try {
             const {videoId}=req.params;
@@ -41,6 +43,8 @@ export const addComment=async(req,res)=>{
         }
 }
 
+
+//editing a comment
 export const editComment=async(req,res)=>{
     try {
         const {videoId,commentId}=req.params;
@@ -62,6 +66,8 @@ export const editComment=async(req,res)=>{
     }
 }
 
+
+//deleting a comment
 export const deleteComment=async(req,res)=>{
     try {
         const {videoId,commentId}=req.params;

@@ -5,6 +5,8 @@ import dotenv from "dotenv"
 
 dotenv.config();
 
+
+//register new user 
 export const userRegister = async (req, res) => {
   try {
   const { username, email, password } = req.body;
@@ -46,6 +48,7 @@ export const userRegister = async (req, res) => {
 };
 
 
+//login a user
 export const userLogin= (req,res)=>{
 
   const {email,password}=req.body;

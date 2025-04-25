@@ -2,7 +2,7 @@ import { userLogin, userRegister } from "../controllers/userLoginReg.controller.
 import { upload } from "../middleware/upload.js";
 
 
-
+//user Login Routes
 function UserLoginRoute(app){
    app.post("/register",upload.single('avatar'),userRegister)
    app.post("/login",userLogin)

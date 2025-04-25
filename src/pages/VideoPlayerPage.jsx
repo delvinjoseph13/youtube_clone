@@ -31,10 +31,13 @@ function VideoPlayerPage() {
   const user = JSON.parse(localStorage.getItem("user"));
   const userId = user?.userId;
 
+
+  //function to go the video player for the particular video id
   function handleGetVideo(id) {
     navigate(`/watch/v/${id}`);
   }
-
+  
+  //getting all the videos in the first render
   useEffect(() => {
     const fetchData = async () => {
       await axios
@@ -48,6 +51,8 @@ function VideoPlayerPage() {
     fetchData();
   }, []);
 
+  
+  //and only find the particular video with the id
   const video = videos.find((video) => video.videoId === id);
 
   useEffect(() => {
@@ -59,6 +64,7 @@ function VideoPlayerPage() {
     }
   }, [dispatch, video?._id]);
 
+  //addig a comment
   const handleComment = () => {
     if (comment.trim() && video?._id) {
       dispatch(
@@ -74,12 +80,14 @@ function VideoPlayerPage() {
     }
   };
 
+  //deleting a comment
   const handleDeleteComment = (commentId) => {
     if (video?._id) {
       dispatch(deleteComment({ videoId: video._id, commentId }));
     }
   };
 
+  //edit a comment
   const handleEditComment = (comment) => {
     setEditingComment(comment);
     setComment(comment.text);

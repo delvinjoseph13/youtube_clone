@@ -1,5 +1,7 @@
 import ReactionModel from "../module/ReactionModel.js";
 
+
+//adding like and dislike
 export const likedislike = async (req, res) => {
     const { videoId } = req.params;
     const { userId, type } = req.body;
@@ -39,6 +41,8 @@ export const likedislike = async (req, res) => {
   };
 
 
+
+//getting the reactions which is count of both like and dislike
 export const getReaction=async(req,res)=>{
     const {videoId}=req.params;
 

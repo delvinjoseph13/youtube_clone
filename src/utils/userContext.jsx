@@ -5,6 +5,7 @@ const UserContext = createContext({
   setUser: () => {},
 });
 
+//this userProvider give details like user details to every child
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(() => {
     const storedUser = localStorage.getItem("user");

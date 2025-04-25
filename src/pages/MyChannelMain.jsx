@@ -9,7 +9,7 @@ function MyChannelMain() {
   const [channelExists, setChannelExists] = useState(null);
   const [channelDetails, setChannelDetails] = useState({});
   const [selectedVideoId, setSelectedVideoId] = useState(null);
-  const { user } = useContext(UserContext);
+  const { user } = useContext(UserContext);//context api
   const avatar = user?.avatar;
 
   // Edit states
@@ -36,7 +36,7 @@ function MyChannelMain() {
         }
       } catch (error) {
         if (error.response?.status === 404) {
-          navigate("/create-channel");
+          navigate("/cretechannel");
         } else {
           console.error("Unexpected error", error);
         }
@@ -52,6 +52,7 @@ function MyChannelMain() {
     setEditTitle(currentTitle);
   };
 
+  //editing the channel Video ny the channel id and videoId
   const handleEditSubmit = async () => {
     try {
       const response = await axios.patch(
@@ -71,6 +72,7 @@ function MyChannelMain() {
     }
   };
 
+  //deleting the channel video by passing channel ID and video id
   const handleDelete = async (videoId) => {
     const confirmed = window.confirm("Are you sure you want to delete this video?");
     if (!confirmed) return;
@@ -91,6 +93,7 @@ function MyChannelMain() {
     }
   };
 
+  //adding new video to the channel by channel id
   const addVideos = async () => {
     try {
       if (!addVideoId || !addVideoTitle || !addVideoImg) {

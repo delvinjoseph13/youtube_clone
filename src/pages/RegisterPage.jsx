@@ -24,7 +24,7 @@ function RegisterPage() {
 
         }
       
-
+        //register new user
         const RegisterApi=axios.post(`http://localhost:5000/register`,formData,{
           headers: {
             "Content-Type": "multipart/form-data",  
