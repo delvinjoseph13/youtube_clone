@@ -32,7 +32,7 @@ Frontend (React)
 Technology      |     Usage
 Frontend        | React, React Router, Axios
 Backend         | Node.js, Express.js
-Database        | MongoDB Atlas
+Database        | MongoDB Compass
 Authentication  | JWT (JSON Web Tokens)
 Version Control | Git & GitHub
 

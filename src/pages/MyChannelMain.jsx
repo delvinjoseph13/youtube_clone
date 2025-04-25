@@ -23,27 +23,40 @@ function MyChannelMain() {
   const [addVideoTitle, setAddVideoTitle] = useState("");
   const [addVideoImg, setAddVideoImg] = useState("");
 
+  const fetchChannelData = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:5000/channel/videos/${username}`
+      );
+      if (response.status === 200) {
+        setChannelDetails(response.data);
+      }
+    } catch (error) {
+      console.error("Error fetching channel data:", error);
+    }
+  };
+
   useEffect(() => {
     const checkChannelExists = async () => {
       try {
         const response = await axios.get(
           `http://localhost:5000/channel/videos/${username}`
         );
-
         if (response.status === 200) {
           setChannelExists(true);
-          setChannelDetails(response.data);
+          await fetchChannelData();
         }
       } catch (error) {
         if (error.response?.status === 404) {
-          navigate("/cretechannel");
+          navigate("/create-channel");
         } else {
           console.error("Unexpected error", error);
         }
       }
     };
-
-    checkChannelExists();
+    
+   
+    checkChannelExists(); 
   }, [username, navigate]);
 
   const handleEditClick = (videoId, currentTitle) => {
@@ -52,7 +65,6 @@ function MyChannelMain() {
     setEditTitle(currentTitle);
   };
 
-  //editing the channel Video ny the channel id and videoId
   const handleEditSubmit = async () => {
     try {
       const response = await axios.patch(
@@ -61,18 +73,15 @@ function MyChannelMain() {
       );
 
       if (response.status === 200) {
-        const updatedVideos = channelDetails.videos.map((video) =>
-          video._id === editVideoId ? { ...video, videoTitle: editTitle } : video
-        );
-        setChannelDetails((prev) => ({ ...prev, videos: updatedVideos }));
+        await fetchChannelData();
         setIsEditing(false);
       }
     } catch (error) {
       console.error("Edit error:", error);
+      alert("Failed to update video title");
     }
   };
 
-  //deleting the channel video by passing channel ID and video id
   const handleDelete = async (videoId) => {
     const confirmed = window.confirm("Are you sure you want to delete this video?");
     if (!confirmed) return;
@@ -83,17 +92,14 @@ function MyChannelMain() {
       );
       
       if (response.status === 200) {
-        const updatedVideos = channelDetails.videos.filter(
-          (video) => video._id !== videoId
-        );
-        setChannelDetails((prev) => ({ ...prev, videos: updatedVideos }));
+        await fetchChannelData();
       }
     } catch (error) {
       console.error("Delete error:", error);
+      alert("Failed to delete video");
     }
   };
 
-  //adding new video to the channel by channel id
   const addVideos = async () => {
     try {
       if (!addVideoId || !addVideoTitle || !addVideoImg) {
@@ -111,16 +117,7 @@ function MyChannelMain() {
       );
 
       if (response.status === 200) {
-        setChannelDetails(prev => ({
-          ...prev,
-          videos: [...prev.videos, {
-            _id: Date.now().toString(),
-            videoId: addVideoId,
-            videoTitle: addVideoTitle,
-            videoImg: addVideoImg
-          }]
-        }));
-        
+        await fetchChannelData();
         setAddVideoId("");
         setAddVideoTitle("");
         setAddVideoImg("");
