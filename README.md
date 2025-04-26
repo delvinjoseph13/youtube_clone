@@ -1,3 +1,8 @@
+
+https://github.com/delvinjoseph13/youtube_clone
+for getting youtube id :-
+ eg:- https://www.youtube.com/watch?v=urTfEEsGHds&ab_channel=Apple  this is a link we need to copy urTfEEsGHds this is the videoid just copy paste this in the videoId
+
 🎬 YouTube Clone — MERN Stack Capstone Project
 
 A full-stack YouTube Clone built using the MERN (MongoDB, Express, React, Node.js) stack, featuring user authentication, video player, channel management, and responsive UI. This project replicates the core functionality of YouTube, including searching, filtering, commenting, liking/disliking
